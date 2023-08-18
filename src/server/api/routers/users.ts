@@ -1,7 +1,7 @@
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
 export const userRouter = createTRPCRouter({
-  getId: publicProcedure.query(({ ctx }) => {
+  getId: protectedProcedure.query(({ ctx }) => {
     return `${ctx.user?.id}`;
   }),
 });
