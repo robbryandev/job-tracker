@@ -11,6 +11,7 @@
     "db:push": "drizzle-kit push:mysql"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.23.2",
     "@planetscale/database": "^1.10.0",
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-slot": "^1.0.2",

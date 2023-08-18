@@ -4,6 +4,9 @@ import { jobTable } from "@/server/db/schema/schema";
 import { db } from "@/server/db/drizzle";
 
 export const jobRouter = createTRPCRouter({
+  test: publicProcedure.query(({ ctx }) => {
+    return `Your email is: ${ctx.user?.emailAddresses[0]?.emailAddress}`;
+  }),
   add: publicProcedure.input(validator).mutation(({ input }) => {
     db.insert(jobTable)
       .values(input)
