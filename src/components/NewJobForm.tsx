@@ -1,19 +1,21 @@
 import { api } from "@/utils/api";
-import { type FormEvent, useState, ChangeEvent } from "react";
+import { type FormEvent, type ChangeEvent, useState } from "react";
 import { type Job } from "@/server/db/schema/job";
 
 import { TextInput } from "@/components/ui/TextInput";
 import DatePicker from "@/components/ui/DatePicker";
-import { Button } from "./ui/Button";
+import { Button } from "@/components/ui/Button";
 
-export default function NewJobForm() {
+export default function NewJobForm({ userId }: { userId: string }) {
   const client = api.useContext().client;
-  const [job, setJob] = useState<Job>({
+  const defaultJob: Job = {
     company: "",
     applyDate: new Date(),
     status: "applied",
     statusDate: new Date(),
-  });
+    userId: userId,
+  };
+  const [job, setJob] = useState<Job>(defaultJob);
 
   const testNewJob = (event: FormEvent) => {
     event.preventDefault();
@@ -21,6 +23,7 @@ export default function NewJobForm() {
       .mutate(job)
       .then((res) => {
         console.log(res);
+        setJob(defaultJob);
       })
       .catch((err) => {
         console.log(err);

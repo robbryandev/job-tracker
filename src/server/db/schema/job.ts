@@ -9,18 +9,18 @@ import z from "zod";
 
 export const validator = z.object({
   id: z.number().optional(),
-  company: z.string(),
+  company: z.string().max(255),
   applyDate: z.date().default(new Date()),
   status: z
     .enum(["applied", "rejected", "interview", "accepted"])
     .default("applied"),
   statusDate: z.date().default(new Date()),
-  userId: z.string().optional(),
+  userId: z.string().max(64).optional(),
 });
 
 export const schema = mysqlTable("jobs", {
   id: serial("id").primaryKey().autoincrement(),
-  userId: varchar("userId", { length: 36 }),
+  userId: varchar("userId", { length: 64 }),
   company: varchar("company", { length: 255 }),
   applyDate: date("applyDate").default(new Date()),
   status: mysqlEnum("status", [

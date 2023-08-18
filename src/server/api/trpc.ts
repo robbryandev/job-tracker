@@ -14,10 +14,6 @@ import { ZodError } from "zod";
 
 import { clerkClient, getAuth } from "@clerk/nextjs/server";
 import { type User } from "@clerk/nextjs/api";
-import type {
-  SignedInAuthObject,
-  SignedOutAuthObject,
-} from "@clerk/nextjs/server";
 
 /**
  * 1. CONTEXT
@@ -26,10 +22,6 @@ import type {
  *
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
-
-interface AuthContext {
-  auth: SignedInAuthObject | SignedOutAuthObject;
-}
 
 type CreateContextOptions = {
   user: User | null;
