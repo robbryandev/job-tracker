@@ -28,35 +28,37 @@ export default function NewJobForm() {
   };
 
   return (
-    <form onSubmit={testNewJob} className="mx-auto h-full w-10/12">
-      <div className="mx-auto flex h-full flex-col space-y-8 p-4">
-        <h3 className="pl-2 text-2xl font-medium">New Job</h3>
-        <div>
-          <TextInput
-            label="Company"
-            name="company"
-            id="company"
-            value={job.company}
-            onChange={(event: ChangeEvent) => {
-              const target = event.currentTarget as HTMLInputElement;
-              setJob({ ...job, company: target.value });
-            }}
-          />
-        </div>
-        <div>
+    <div className="h-full w-full rounded-md shadow-md">
+      <form onSubmit={testNewJob} className="mx-auto h-full w-10/12">
+        <div className="mx-auto flex h-full flex-col space-y-8 p-4">
+          <h3 className="pl-2 text-2xl font-medium">New Job</h3>
           <div>
-            <DatePicker
-              label="Application Date"
-              onDateChange={(date: Date) => {
-                setJob({ ...job, applyDate: date, statusDate: date });
+            <TextInput
+              label="Company"
+              name="company"
+              id="company"
+              value={job.company}
+              onChange={(event: ChangeEvent) => {
+                const target = event.currentTarget as HTMLInputElement;
+                setJob({ ...job, company: target.value });
               }}
             />
           </div>
+          <div>
+            <div>
+              <DatePicker
+                label="Application Date"
+                onDateChange={(date: Date) => {
+                  setJob({ ...job, applyDate: date, statusDate: date });
+                }}
+              />
+            </div>
+          </div>
+          <Button variant={"default"} type="submit">
+            Add job
+          </Button>
         </div>
-        <Button variant={"default"} type="submit">
-          Add job
-        </Button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

@@ -15,10 +15,12 @@ export const validator = z.object({
     .enum(["applied", "rejected", "interview", "accepted"])
     .default("applied"),
   statusDate: z.date().default(new Date()),
+  userId: z.string().optional(),
 });
 
 export const schema = mysqlTable("jobs", {
   id: serial("id").primaryKey().autoincrement(),
+  userId: varchar("userId", { length: 36 }),
   company: varchar("company", { length: 255 }),
   applyDate: date("applyDate").default(new Date()),
   status: mysqlEnum("status", [
