@@ -1,5 +1,5 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { type Job, validator } from "@/server/db/schema/job";
+import { validator } from "@/server/db/schema/job";
 import { jobTable } from "@/server/db/schema/schema";
 import { db } from "@/server/db/drizzle";
 import { eq } from "drizzle-orm";
@@ -7,13 +7,15 @@ import { z } from "zod";
 
 export const jobRouter = createTRPCRouter({
   add: protectedProcedure.input(validator).mutation(({ input }) => {
-    db.insert(jobTable)
+    return db
+      .insert(jobTable)
       .values(input)
       .then((res) => {
-        return res;
+        const dbRes = { jobId: parseInt(res.insertId) };
+        return dbRes;
       })
       .catch((err: unknown) => {
-        return err;
+        return JSON.stringify(err);
       });
   }),
   getForUser: protectedProcedure

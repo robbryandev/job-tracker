@@ -5,7 +5,7 @@ import JobList from "@/components/JobList";
 import { useUser } from "@clerk/nextjs";
 import { type Job, type JobDb } from "@/server/db/schema/job";
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type JobCache =
   | {
@@ -18,55 +18,73 @@ export default function Dashboard() {
   const client = api.useContext().client;
   const user = useUser();
   const userId = user.user?.id;
-  let dbJobs: JobDb[] = [];
+  const [dbJobs, setDbJobs] = useState<JobDb[]>([]);
   const [userJobs, setUserJobs] = useState<Job[]>([]);
-  if (userId) {
-    const userJobsCache =
-      typeof window != "undefined" && userId
-        ? localStorage.getItem(`${userId}-jobs`)
-        : null;
-    let updateJobs = false;
-    checkCacheData: if (userJobsCache != null) {
-      console.log("Getting Job cache");
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const data: JobCache = JSON.parse(userJobsCache);
-      if (!data) {
-        break checkCacheData;
+  useEffect(() => {
+    if (userId) {
+      const userJobsCache =
+        typeof window != "undefined" && userId
+          ? localStorage.getItem(`${userId}-jobs`)
+          : null;
+      let updateJobs = false;
+      checkCacheData: if (userJobsCache != null) {
+        console.log("Getting Job cache");
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const data: JobCache = JSON.parse(userJobsCache);
+        if (!data) {
+          break checkCacheData;
+        }
+        const unixHour = 3600;
+        const lastHour = moment().unix() - unixHour;
+        // dbJobs = data?.data ? data.data : [];
+        updateJobs = lastHour > moment(data.updated).unix();
+        if (!updateJobs && data) {
+          setDbJobs(data.data);
+        }
+        console.log(`updateJobs: ${updateJobs}`);
       }
-      const unixHour = 3600;
-      const lastHour = moment().unix() - unixHour;
-      dbJobs = data?.data ? data.data : [];
-      updateJobs = lastHour > moment(data.updated).unix();
-      console.log(`updateJobs: ${updateJobs}`);
+      if (updateJobs || userJobsCache == null) {
+        console.log("Updating job cache");
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        client.jobs.getForUser
+          .query({
+            userId: userId ? userId : "",
+          })
+          .then((jobRes: JobDb[]) => {
+            // dbJobs = jobRes;
+            setDbJobs(jobRes);
+            localStorage.setItem(
+              `${userId}-jobs`,
+              JSON.stringify({
+                data: jobRes,
+                updated: new Date(),
+              })
+            );
+          })
+          .catch((err: unknown) => {
+            console.log(err);
+          });
+      }
     }
-    if (updateJobs || userJobsCache == null) {
-      console.log("Updating job cache");
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      client.jobs.getForUser
-        .query({
-          userId: userId ? userId : "",
-        })
-        .then((jobRes: JobDb[]) => {
-          dbJobs = jobRes;
-          localStorage.setItem(
-            `${userId}-jobs`,
-            JSON.stringify({
-              data: jobRes,
-              updated: new Date(),
-            })
-          );
-        })
-        .catch((err: unknown) => {
-          console.log(err);
-        });
-    }
-  }
+  }, [userId]);
 
   return (
     <main className="min-h-screen w-full bg-neutral-100 p-12">
       <div className="h-auto w-auto min-w-[250px] max-w-[350px] rounded-md bg-white">
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment*/}
-        <NewJobForm userId={userId} updateJobs={setUserJobs} />
+        {userId ? (
+          <NewJobForm
+            userId={userId}
+            currentJobs={userJobs}
+            updateJobs={setUserJobs}
+          />
+        ) : (
+          <NewJobForm
+            userId={""}
+            currentJobs={userJobs}
+            updateJobs={setUserJobs}
+          />
+        )}
       </div>
       <br />
       <div>
