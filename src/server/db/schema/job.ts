@@ -32,4 +32,13 @@ export const schema = mysqlTable("jobs", {
   statusDate: date("statusDate").default(new Date()),
 });
 
+export type JobDb = {
+  userId: string | null;
+  id: number;
+  company: string | null;
+  applyDate: Date | null;
+  status: "applied" | "rejected" | "interview" | "accepted" | null;
+  statusDate: Date | null;
+};
+
 export type Job = z.infer<typeof validator>;

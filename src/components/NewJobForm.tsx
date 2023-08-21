@@ -6,7 +6,13 @@ import { TextInput } from "@/components/ui/TextInput";
 import DatePicker from "@/components/ui/DatePicker";
 import { Button } from "@/components/ui/Button";
 
-export default function NewJobForm({ userId }: { userId: string }) {
+export default function NewJobForm({
+  userId,
+  updateJobs,
+}: {
+  userId: string | undefined;
+  updateJobs: Function;
+}) {
   const client = api.useContext().client;
   const defaultJob: Job = {
     company: "",
