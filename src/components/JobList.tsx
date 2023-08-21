@@ -11,11 +11,11 @@ export default function JobList({
 }) {
   const jobs = dbJobs ? [...dbJobs, ...userJobs] : [...userJobs];
   return (
-    <table className="table-auto border-separate border-spacing-2">
+    <table className="mx-auto w-10/12 table-auto border-collapse border-spacing-x-20 border-spacing-y-10 overflow-x-scroll border bg-neutral-200 shadow-md md:mx-4 md:w-auto md:border-spacing-80">
       <thead>
         <tr>
           <th>Company</th>
-          <th>Last Updated</th>
+          <th className="hidden md:block">Last Updated</th>
           <th>Status</th>
           <th></th>
         </tr>
@@ -34,11 +34,11 @@ export default function JobList({
             const displayDate =
               statusDate == today ? "today" : relativeStatusDate;
             return (
-              <tr key={index}>
-                <td>{job.company}</td>
-                <td>{displayDate}</td>
-                <td>{job.status}</td>
-                <td>
+              <tr key={index} className="odd:bg-white even:bg-neutral-100">
+                <td className="py-4 pl-4 pr-6">{job.company}</td>
+                <td className="hidden px-6 py-4 md:block">{displayDate}</td>
+                <td className="px-6 py-4">{job.status}</td>
+                <td className="py-4 pl-6 pr-4">
                   <a
                     href={`/dashboard/${job.userId}/${job.id}`}
                     className="underline underline-offset-1"

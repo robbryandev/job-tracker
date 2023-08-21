@@ -69,7 +69,8 @@ export default function Dashboard() {
   }, [userId]);
 
   return (
-    <main className="min-h-screen w-full bg-neutral-100 p-12">
+    <main className="min-h-screen w-full bg-neutral-100 p-4 md:p-12">
+      <Link href={"/"}>Home</Link>
       <div className="h-auto w-auto min-w-[250px] max-w-[350px] rounded-md bg-white">
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment*/}
         {userId ? (
@@ -90,7 +91,6 @@ export default function Dashboard() {
       <div>
         <JobList dbJobs={dbJobs} userJobs={userJobs} />
       </div>
-      <Link href={"/"}>Home</Link>
     </main>
   );
 }
