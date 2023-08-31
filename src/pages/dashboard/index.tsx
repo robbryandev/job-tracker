@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { api } from "@/utils/api";
 import NewJobForm from "@/components/NewJobForm";
+import LoadingJobForm from "@/components/loading/NewJobForm";
 import JobList from "@/components/JobList";
 import { useUser } from "@clerk/nextjs";
 import { type Job, type JobDb } from "@/server/db/schema/job";
 import moment from "moment";
 import { useState, useEffect } from "react";
 
-type JobCache =
+export type JobCache =
   | {
       data: JobDb[];
       updated: Date;
@@ -80,15 +81,11 @@ export default function Dashboard() {
             updateJobs={setUserJobs}
           />
         ) : (
-          <NewJobForm
-            userId={""}
-            currentJobs={userJobs}
-            updateJobs={setUserJobs}
-          />
+          <LoadingJobForm />
         )}
       </div>
       <br />
-      <div>
+      <div className="max-w-lg">
         <JobList dbJobs={dbJobs} userJobs={userJobs} />
       </div>
     </main>
