@@ -1,8 +1,17 @@
-import { type JobDb, type Job } from "@/server/db/schema/job";
-import moment from "moment";
-import { Suspense } from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-export default function JobList({
+import Link from "next/link";
+import moment from "moment";
+import { type Job, type JobDb } from "@/server/db/schema/job";
+
+export default function NewJobList({
   dbJobs,
   userJobs,
 }: {
@@ -11,46 +20,43 @@ export default function JobList({
 }) {
   const jobs = dbJobs ? [...dbJobs, ...userJobs] : [...userJobs];
   return (
-    <table className="mx-auto w-10/12 table-auto border-collapse border-spacing-x-20 border-spacing-y-10 overflow-x-scroll border bg-neutral-200 shadow-md md:mx-4 md:w-auto md:border-spacing-80">
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th className="hidden md:block">Last Updated</th>
-          <th>Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <Suspense fallback={<p>loading...</p>}>
-          {jobs.map((job, index) => {
-            const dateFormat = "YYYY-MM-DD";
-            const statusDate = moment(job.statusDate, dateFormat).format(
-              dateFormat
-            );
-            const today = moment().format(dateFormat);
-            const relativeStatusDate = moment(statusDate, dateFormat).from(
-              today
-            );
-            const displayDate =
-              statusDate == today ? "today" : relativeStatusDate;
-            return (
-              <tr key={index} className="odd:bg-white even:bg-neutral-100">
-                <td className="py-4 pl-4 pr-6">{job.company}</td>
-                <td className="hidden px-6 py-4 md:block">{displayDate}</td>
-                <td className="px-6 py-4">{job.status}</td>
-                <td className="py-4 pl-6 pr-4">
-                  <a
-                    href={`/dashboard/${job.userId}/${job.id}`}
-                    className="underline underline-offset-1"
-                  >
-                    details
-                  </a>
-                </td>
-              </tr>
-            );
-          })}
-        </Suspense>
-      </tbody>
-    </table>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableCell>Company</TableCell>
+          <TableCell>Last Updated</TableCell>
+          <TableCell>Status</TableCell>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {jobs.map((job) => {
+          const dateFormat = "YYYY-MM-DD";
+          const statusDate = moment(job.statusDate, dateFormat).format(
+            dateFormat
+          );
+          const today = moment().format(dateFormat);
+          const relativeStatusDate = moment(statusDate, dateFormat).from(today);
+          const displayDate =
+            statusDate == today ? "today" : relativeStatusDate;
+          return (
+            <TableRow key={job.id}>
+              <TableCell>{job.company}</TableCell>
+              <TableCell>{displayDate}</TableCell>
+              <TableCell>{job.status}</TableCell>
+              <TableCell>
+                <Link
+                  href={`/dashboard/${job.userId ? job.userId : "error"}/${
+                    job.id
+                  }`}
+                  className="underline underline-offset-1"
+                >
+                  details
+                </Link>
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 }
