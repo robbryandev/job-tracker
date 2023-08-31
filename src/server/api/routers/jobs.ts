@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { validator } from "@/server/db/schema/job";
 import { jobTable } from "@/server/db/schema/schema";
 import { db } from "@/server/db/drizzle";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { z } from "zod";
 
 export const jobRouter = createTRPCRouter({
@@ -18,16 +20,22 @@ export const jobRouter = createTRPCRouter({
         return JSON.stringify(err);
       });
   }),
+  get: protectedProcedure
+    .input(z.object({ userId: z.string(), jobId: z.number() }))
+    .query(({ input }) => {
+      return db
+        .select()
+        .from(jobTable)
+        .where(
+          and(eq(jobTable.userId, input.userId), eq(jobTable.id, input.jobId))
+        );
+    }),
   getForUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(({ input }) => {
-      return (
-        db
-          .select()
-
-          .from(jobTable)
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          .where(eq(jobTable.userId, input.userId))
-      );
+      return db
+        .select()
+        .from(jobTable)
+        .where(eq(jobTable.userId, input.userId));
     }),
 });
