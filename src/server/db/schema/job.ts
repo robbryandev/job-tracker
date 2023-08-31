@@ -16,6 +16,7 @@ export const validator = z.object({
     .default("applied"),
   statusDate: z.date().default(new Date()),
   userId: z.string().max(64).optional(),
+  content: z.string().max(500).optional(),
 });
 
 export const schema = mysqlTable("jobs", {
@@ -30,6 +31,7 @@ export const schema = mysqlTable("jobs", {
     "accepted",
   ]).default("applied"),
   statusDate: date("statusDate").default(new Date()),
+  content: varchar("content", { length: 500 }),
 });
 
 export type JobDb = {
@@ -39,6 +41,7 @@ export type JobDb = {
   applyDate: Date | null;
   status: "applied" | "rejected" | "interview" | "accepted" | null;
   statusDate: Date | null;
+  content: string | null;
 };
 
 export type Job = z.infer<typeof validator>;
