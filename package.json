@@ -8,7 +8,8 @@
     "lint": "next lint",
     "start": "next start",
     "db:migrate": "drizzle-kit generate:mysql --schema=./src/server/db/schema/schema.ts",
-    "db:push": "drizzle-kit push:mysql"
+    "db:push": "drizzle-kit push:mysql",
+    "doc:bundle": "node ./ref/bundle.js"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
