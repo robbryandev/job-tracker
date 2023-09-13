@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/table";
 
 import Link from "next/link";
-import moment from "moment";
 import { type Job, type JobDb } from "@/server/db/schema/job";
+import { toRelative } from "@/utils/date";
 
 export default function NewJobList({
   dbJobs,
@@ -30,14 +30,7 @@ export default function NewJobList({
       </TableHeader>
       <TableBody>
         {jobs.map((job) => {
-          const dateFormat = "YYYY-MM-DD";
-          const statusDate = moment(job.statusDate, dateFormat).format(
-            dateFormat
-          );
-          const today = moment().format(dateFormat);
-          const relativeStatusDate = moment(statusDate, dateFormat).from(today);
-          const displayDate =
-            statusDate == today ? "today" : relativeStatusDate;
+          const displayDate = toRelative(job.statusDate!);
           return (
             <TableRow key={job.id}>
               <TableCell>{job.company}</TableCell>
@@ -45,9 +38,8 @@ export default function NewJobList({
               <TableCell>{job.status}</TableCell>
               <TableCell>
                 <Link
-                  href={`/dashboard/${job.userId ? job.userId : "error"}/${
-                    job.id
-                  }`}
+                  href={`/dashboard/${job.userId ? job.userId : "error"}/${job.id
+                    }`}
                   className="underline underline-offset-1"
                 >
                   details

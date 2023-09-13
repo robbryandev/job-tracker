@@ -30,6 +30,15 @@ export const jobRouter = createTRPCRouter({
           and(eq(jobTable.userId, input.userId), eq(jobTable.id, input.jobId))
         );
     }),
+  update: protectedProcedure.input(validator).mutation(({ input }) => {
+    return db
+      .update(jobTable)
+      .set(input)
+      .where(eq(jobTable.id, input.id!))
+      .catch((err: unknown) => {
+        return JSON.stringify(err);
+      });
+  }),
   getForUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(({ input }) => {
