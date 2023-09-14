@@ -4,7 +4,6 @@ import { jobDb } from "../utils/db/jobs";
 import NewJobForm from "@/components/NewJobForm/client";
 import DisplayJobs from "@/components/DisplayJobs";
 import { type JobDb } from "@/utils/db/schema/job";
-import { revalidatePath } from "next/cache";
 
 export default async function Dashboard() {
   const user = await currentUser()!;
@@ -12,8 +11,8 @@ export default async function Dashboard() {
   return (
     <>
       <NewJobForm />
+      <br />
       <DisplayJobs userJobs={userJobs} />
-      <footer></footer>
     </>
   )
 }

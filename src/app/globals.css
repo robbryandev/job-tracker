@@ -47,6 +47,10 @@ h1 {
   @apply text-4xl;
 }
 
+svg {
+  display: inline;
+}
+
 .rdp {
   --rdp-cell-size: 40px;
   --rdp-accent-color: #0d0d0d;

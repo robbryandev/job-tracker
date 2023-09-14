@@ -4,7 +4,6 @@ import * as Popover from '@radix-ui/react-popover';
 import { DayPicker } from 'react-day-picker';
 import { newJob } from "./jobAction";
 import moment from "moment";
-import { toRelative } from "@/utils/date";
 
 export default function NewJobForm() {
   const [company, setCompany] = useState("");
