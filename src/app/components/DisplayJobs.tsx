@@ -10,8 +10,12 @@ import { type JobDb } from '@/utils/db/schema/job';
 import { toRelative } from '@/utils/date';
 import colors from "tailwindcss/colors";
 import { SiInstatus } from "react-icons/si";
+import moment from 'moment';
 
 export default async function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
+  const datedJobs: JobDb[] = [...userJobs].sort((a: JobDb, b: JobDb) => {
+    return moment(a.statusDate).unix() >= moment(b.statusDate).unix() ? -1 : 1;
+  });
   const statusColor = {
     "applied": colors.blue["300"],
     "rejected": colors.red["400"],
@@ -20,7 +24,7 @@ export default async function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
   }
   return (
     <TableContainer component={Paper} className='max-w-3xl'>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table aria-label="job table">
         <TableHead className='bg-neutral-800'>
           <TableRow>
             <TableCell>
@@ -38,7 +42,7 @@ export default async function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
         </TableHead>
         <TableBody className='[&>*:nth-child(odd)]:bg-neutral-50'>
           {
-            userJobs.map((job: JobDb) => {
+            datedJobs.map((job: JobDb) => {
               return (
                 <TableRow key={job.id}>
                   <TableCell>
