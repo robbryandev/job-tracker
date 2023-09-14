@@ -1,3 +1,4 @@
+import 'react-day-picker/dist/style.css';
 import './globals.css'
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'

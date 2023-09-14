@@ -26,22 +26,49 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-html, p {
-  @apply text-base
+html,
+p {
+  @apply text-base;
 }
 
 h3 {
-  @apply text-lg
+  @apply text-lg;
 }
 
 h2 {
-  @apply text-xl
+  @apply text-xl;
 }
 
 h1 {
-  @apply text-2xl
+  @apply text-2xl;
 }
 
 .hero {
-  @apply text-4xl
+  @apply text-4xl;
+}
+
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #0d0d0d;
+  --rdp-background-color: var(--rdp-accent-color);
+  /* Switch to dark colors for dark themes */
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  /* Outline border for focused elements */
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  /* Outline border for focused and selected elements */
+  --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
+}
+
+.rdp-cell:hover,
+.rdp-button:hover {
+  color: white;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  color: white;
+  opacity: 1;
+  background-color: var(--rdp-accent-color);
 }
