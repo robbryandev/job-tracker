@@ -46,6 +46,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@react-aria/autocomplete": "^3.0.0-alpha.20",
     "drizzle-kit": "^0.19.13",
     "drizzle-zod": "^0.5.1",
     "react-hook-form": "^7.46.1"

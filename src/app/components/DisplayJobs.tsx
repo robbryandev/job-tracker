@@ -1,3 +1,5 @@
+"use client"
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,8 +13,10 @@ import { toRelative } from '@/utils/date';
 import colors from "tailwindcss/colors";
 import { SiInstatus } from "react-icons/si";
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
 
-export default async function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
+export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
+  const router = useRouter();
   const datedJobs: JobDb[] = [...userJobs].sort((a: JobDb, b: JobDb) => {
     return moment(a.statusDate).unix() >= moment(b.statusDate).unix() ? -1 : 1;
   });
@@ -43,12 +47,14 @@ export default async function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
         <TableBody className='[&>*:nth-child(odd)]:bg-neutral-50'>
           {
             datedJobs.map((job: JobDb) => {
+              const jobPath = `/dashboard/${job.userId}/${job.id}`
               return (
-                <TableRow key={job.id}>
+                <TableRow key={job.id} role="link" className='cursor-pointer' onClick={() => {
+                  router.push(jobPath);
+                }}>
                   <TableCell>
                     <Link
-                      href={`/dashboard/${job.userId ? job.userId : "error"}/${job.id
-                        }`}
+                      href={jobPath}
                       className="underline underline-offset-1"
                     >
                       {job.company}
