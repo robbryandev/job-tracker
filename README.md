@@ -38,8 +38,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## To-do
 
 * Implement notes
-* Implement status changing
-* Customize signup / signin pages
+* Implement job deletion
+* Customize register / login pages
 
 ## Folder Structure 
 
@@ -57,7 +57,11 @@ src
     |   |   DisplayJobs.tsx
     |   |   NavBar.tsx
     |   |   
-    |   \---NewJobForm
+    |   +---NewJobForm
+    |   |       client.tsx
+    |   |       jobAction.ts
+    |   |       
+    |   \---UpdateJobForm
     |           client.tsx
     |           jobAction.ts
     |           

@@ -34,12 +34,14 @@ export const schema = mysqlTable("jobs", {
   content: varchar("content", { length: 500 }),
 });
 
+export type JobStatus = "applied" | "rejected" | "interview" | "accepted"
+
 export type JobDb = {
   userId: string | null;
   id: number;
   company: string | null;
   applyDate: Date | null;
-  status: "applied" | "rejected" | "interview" | "accepted" | null;
+  status: JobStatus | null;
   statusDate: Date | null;
   content: string | null;
 };

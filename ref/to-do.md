@@ -1,5 +1,5 @@
 ## To-do
 
 * Implement notes
-* Implement status changing
+* Implement job deletion
 * Customize register / login pages

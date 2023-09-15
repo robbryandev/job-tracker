@@ -1,6 +1,7 @@
 import { jobDb } from "@/utils/db/jobs";
 import { type JobDb } from "@/utils/db/schema/job";
 import { toRelative } from "@/utils/date";
+import UpdateJobForm from "@/components/UpdateJobForm/client";
 
 export default async function JobDetails({ params }: { params: { user: string, job: string } }) {
   const jobQuery: JobDb[] = await jobDb.getById(params.user, parseInt(params.job));
@@ -9,16 +10,7 @@ export default async function JobDetails({ params }: { params: { user: string, j
     <>
       {thisJob ? (
         <main>
-          <p className="text-center text-3xl">
-            {thisJob.company}: {thisJob.status}
-          </p>
-          <br />
-          <div>
-            <p className="text-center text-xl">Applied: {toRelative(thisJob.applyDate!)}</p>
-            <p className="text-center text-xl">
-              Last Updated: {toRelative(thisJob.statusDate!)}
-            </p>
-          </div>
+          <UpdateJobForm currentJob={thisJob} />
           <div>
             <p>Notes</p>
             <h3>Add Notes client Component</h3>

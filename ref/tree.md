@@ -14,7 +14,11 @@ src
     |   |   DisplayJobs.tsx
     |   |   NavBar.tsx
     |   |   
-    |   \---NewJobForm
+    |   +---NewJobForm
+    |   |       client.tsx
+    |   |       jobAction.ts
+    |   |       
+    |   \---UpdateJobForm
     |           client.tsx
     |           jobAction.ts
     |           
