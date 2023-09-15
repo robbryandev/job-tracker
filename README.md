@@ -38,7 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## To-do
 
 * Implement notes
-* Implement job deletion
 * Customize register / login pages
 
 ## Folder Structure 

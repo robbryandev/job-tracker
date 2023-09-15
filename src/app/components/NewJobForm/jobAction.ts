@@ -5,7 +5,6 @@ import { jobDb } from "@/utils/db/jobs";
 import { revalidatePath } from "next/cache";
 
 export async function newJob(data: { company: string, date: Date }) {
-  console.log(data.date)
   const user = await currentUser();
   const job: Job = {
     company: data.company,

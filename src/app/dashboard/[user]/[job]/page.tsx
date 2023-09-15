@@ -1,6 +1,6 @@
 import { jobDb } from "@/utils/db/jobs";
 import { type JobDb } from "@/utils/db/schema/job";
-import { toRelative } from "@/utils/date";
+import DeleteJob from "@/components/DeleteJob/client";
 import UpdateJobForm from "@/components/UpdateJobForm/client";
 
 export default async function JobDetails({ params }: { params: { user: string, job: string } }) {
@@ -10,6 +10,7 @@ export default async function JobDetails({ params }: { params: { user: string, j
     <>
       {thisJob ? (
         <main>
+          <DeleteJob currentJob={thisJob} />
           <UpdateJobForm currentJob={thisJob} />
           <div>
             <p>Notes</p>

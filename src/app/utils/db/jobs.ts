@@ -19,6 +19,11 @@ export const jobDb = {
       .set(job)
       .where(eq(jobTable.id, job.id!));
   },
+  delete: async (jobId: number) => {
+    return db
+      .delete(jobTable)
+      .where(eq(jobTable.id, jobId));
+  },
   getById: async (userId: string, jobId: number) => {
     const res = await db
       .select()
