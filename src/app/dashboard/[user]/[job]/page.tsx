@@ -10,6 +10,10 @@ export default async function JobDetails({ params }: { params: { user: string, j
     <>
       {thisJob ? (
         <main>
+          <p className="text-center text-3xl">
+            {thisJob.company}: {thisJob.status}
+          </p>
+          <br />
           <DeleteJob currentJob={thisJob} />
           <UpdateJobForm currentJob={thisJob} />
           <div>

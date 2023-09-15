@@ -13,10 +13,6 @@ export default function UpdateJobForm({ currentJob }: { currentJob: JobDb }) {
   const [date, setDate] = useState<Date>(new Date());
   return (
     <>
-      <p className="text-center text-3xl">
-        {currentJob.company}: {status}
-      </p>
-      <br />
       <p className="text-center text-xl">
         Last Updated: {toRelative(currentJob.statusDate!)}
       </p>

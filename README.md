@@ -56,6 +56,10 @@ src
     |   |   DisplayJobs.tsx
     |   |   NavBar.tsx
     |   |   
+    |   +---DeleteJob
+    |   |       client.tsx
+    |   |       jobAction.ts
+    |   |       
     |   +---NewJobForm
     |   |       client.tsx
     |   |       jobAction.ts
