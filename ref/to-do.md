@@ -2,4 +2,4 @@
 
 * Implement notes
 * Implement status changing
-* Customize signup / signin pages
+* Customize register / login pages
