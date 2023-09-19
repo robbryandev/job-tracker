@@ -22,6 +22,10 @@ src
     |   |       client.tsx
     |   |       jobAction.ts
     |   |       
+    |   +---NotesForm
+    |   |       client.tsx
+    |   |       NoteAction.ts
+    |   |       
     |   \---UpdateJobForm
     |           client.tsx
     |           jobAction.ts
