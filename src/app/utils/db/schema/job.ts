@@ -2,7 +2,7 @@ import {
   mysqlTable,
   serial,
   varchar,
-  date,
+  datetime,
   mysqlEnum,
 } from "drizzle-orm/mysql-core";
 import z from "zod";
@@ -23,14 +23,14 @@ export const schema = mysqlTable("jobs", {
   id: serial("id").primaryKey().autoincrement(),
   userId: varchar("userId", { length: 64 }),
   company: varchar("company", { length: 255 }),
-  applyDate: date("applyDate").default(new Date()),
+  applyDate: datetime("applyDate").default(new Date()),
   status: mysqlEnum("status", [
     "applied",
     "rejected",
     "interview",
     "accepted",
   ]).default("applied"),
-  statusDate: date("statusDate").default(new Date()),
+  statusDate: datetime("statusDate").default(new Date()),
   content: varchar("content", { length: 500 }),
 });
 

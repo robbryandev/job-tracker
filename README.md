@@ -38,7 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## To-do
 
 ### Main
-* Implement notes
 * Add job status statistics
   - and option to turn toggle
 * Flesh out home page
@@ -72,6 +71,10 @@ src
     |   +---NewJobForm
     |   |       client.tsx
     |   |       jobAction.ts
+    |   |       
+    |   +---NotesForm
+    |   |       client.tsx
+    |   |       NoteAction.ts
     |   |       
     |   \---UpdateJobForm
     |           client.tsx

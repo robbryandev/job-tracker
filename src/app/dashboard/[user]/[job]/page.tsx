@@ -2,6 +2,10 @@ import { jobDb } from "@/utils/db/jobs";
 import { type JobDb } from "@/utils/db/schema/job";
 import DeleteJob from "@/components/DeleteJob/client";
 import UpdateJobForm from "@/components/UpdateJobForm/client";
+import NotesForm from "@/components/NotesForm/client";
+
+export const revalidate = 0;
+export const dynamic = "force-dynamic"
 
 export default async function JobDetails({ params }: { params: { user: string, job: string } }) {
   const jobQuery: JobDb[] = await jobDb.getById(params.user, parseInt(params.job));
@@ -18,7 +22,7 @@ export default async function JobDetails({ params }: { params: { user: string, j
           <UpdateJobForm currentJob={thisJob} />
           <div>
             <p>Notes</p>
-            <h3>Add Notes client Component</h3>
+            <NotesForm currentJob={thisJob} />
           </div>
         </main>
       ) : (

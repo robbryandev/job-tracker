@@ -24,7 +24,7 @@ export default function DeleteJob({ currentJob }: { currentJob: JobDb }) {
               <div>
                 <button type="submit">Delete</button>
                 <Popover.Close>
-                  <button type="button">Cancel</button>
+                  Cancel
                 </Popover.Close>
               </div>
             </form>

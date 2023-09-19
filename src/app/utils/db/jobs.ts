@@ -2,8 +2,9 @@ import "server-only"
 
 import { db } from "./drizzle"
 import { jobTable } from "./schema/schema";
-import { type Job } from "./schema/job"
+import { type JobDb, type Job } from "./schema/job"
 import { eq, and } from "drizzle-orm";
+import moment from "moment";
 
 export const jobDb = {
   add: async (job: Job) => {
@@ -34,10 +35,16 @@ export const jobDb = {
     return res;
   },
   getAll: async (userId: string) => {
-    const res = await db
-      .select()
-      .from(jobTable)
-      .where(eq(jobTable.userId, userId));
+    let res: JobDb[] = [];
+    try {
+      res = await db
+        .select()
+        .from(jobTable)
+        .where(eq(jobTable.userId, userId));
+    } catch (error) {
+      console.log(`Error: ${error}`)
+      console.log("User has no jobs");
+    }
     return res;
   }
 }

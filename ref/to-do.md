@@ -1,7 +1,6 @@
 ## To-do
 
 ### Main
-* Implement notes
 * Add job status statistics
   - and option to turn toggle
 * Flesh out home page

@@ -1,11 +1,7 @@
 import "server-only"
 
-import { drizzle } from "drizzle-orm/planetscale-serverless";
-import { type Connection, connect } from "@planetscale/database";
-import * as schema from "./schema/schema";
+import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 
-const connection: Connection = connect({
-  url: process.env.DATABASE_URL,
-});
-
-export const db = drizzle(connection, { schema });
+const connection = mysql.createPool(process.env.DATABASE_URL!);
+export const db = drizzle(connection);
