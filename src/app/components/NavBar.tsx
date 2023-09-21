@@ -8,7 +8,7 @@ export default function NavBar() {
   const user = useAuth();
   const { signOut } = useClerk();
   const path = usePathname();
-  return (
+  return path != "/" ? (
     <nav className='space-x-10'>
       {
         user.isSignedIn ? (
@@ -26,5 +26,5 @@ export default function NavBar() {
         )
       }
     </nav>
-  )
+  ) : <nav></nav>
 }

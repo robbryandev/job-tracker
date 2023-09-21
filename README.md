@@ -50,8 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## To-do
 
 ### Main
-* Flesh out home page
-* Restyle app
+* Add password confirmation error msg
 
 ### Stretch
 * Implement Job aggregator
