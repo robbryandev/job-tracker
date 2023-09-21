@@ -1,5 +1,5 @@
 "use client"
-import { useAuth, UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton, SignOutButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -13,10 +13,10 @@ export default function NavBar() {
           <>
             <UserButton afterSignOutUrl='/' />
             {
-              path == "/dashboard" ? (
-                <Link href={"/"}>Home</Link>
-              ) : (
-                <Link href={"/dashboard"}>Dashboard</Link>
+              path == "/dashboard" ? null : (
+                <>
+                  <Link href={"/dashboard"}>Dashboard</Link>
+                </>
               )
             }
           </>
