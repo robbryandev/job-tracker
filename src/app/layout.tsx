@@ -20,7 +20,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className + " px-10"}>
+        <body className={inter.className + " px-10 bg-neutral-100"}>
           <NavBar />
           {children}
         </body>

@@ -9,7 +9,7 @@ export default function NewJobForm() {
   const [company, setCompany] = useState("");
   const [date, setDate] = useState<Date>(new Date());
   return (
-    <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md">
+    <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white">
       <form action={() => newJob({ company: company, date: moment.utc(date, "YYYY-MM-DD").toDate() })} onSubmit={() => {
         setCompany("");
       }} className="mx-auto h-full w-10/12">

@@ -13,11 +13,7 @@ export default function UpdateJobForm({ currentJob }: { currentJob: JobDb }) {
   const [date, setDate] = useState<Date>(new Date());
   return (
     <>
-      <p className="text-center text-xl">
-        Last Updated: {toRelative(currentJob.statusDate!)}
-      </p>
-      <p className="text-center text-xl">Applied: {toRelative(currentJob.applyDate!)}</p>
-      <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md">
+      <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white">
         <form action={() => {
           updateJob({ status: tmpStatus, date: date, currentJob: currentJob! })
         }} onSubmit={() => setStatus(tmpStatus)} className="mx-auto h-full w-10/12">

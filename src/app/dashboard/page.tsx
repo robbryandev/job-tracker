@@ -12,7 +12,7 @@ export default async function Dashboard() {
   return (
     <main>
       <JobStats userJobs={userJobs} />
-      <div className="flex flex-col md:flex-row gap-6 pt-2">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-10 pt-4 md:pt-6">
         <NewJobForm />
         <DisplayJobs userJobs={userJobs} />
       </div>
