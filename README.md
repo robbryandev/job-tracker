@@ -38,8 +38,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## To-do
 
 ### Main
-* Add job status statistics
-  - and option to turn toggle
 * Flesh out home page
 * Restyle app
 * Customize register / login pages
@@ -62,6 +60,7 @@ src
     |   
     +---components
     |   |   DisplayJobs.tsx
+    |   |   JobStats.tsx
     |   |   NavBar.tsx
     |   |   
     |   +---DeleteJob
@@ -87,6 +86,9 @@ src
     |       \---[job]
     |               page.tsx
     |               
+    +---hooks
+    |       useLocal.ts
+    |       
     +---login
     |   \---[[...login]]
     |           page.tsx
@@ -96,6 +98,7 @@ src
     |           page.tsx
     |           
     \---utils
+        |   color.ts
         |   date.ts
         |   
         \---db

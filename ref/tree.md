@@ -12,6 +12,7 @@ src
     |   
     +---components
     |   |   DisplayJobs.tsx
+    |   |   JobStats.tsx
     |   |   NavBar.tsx
     |   |   
     |   +---DeleteJob
@@ -37,6 +38,9 @@ src
     |       \---[job]
     |               page.tsx
     |               
+    +---hooks
+    |       useLocal.ts
+    |       
     +---login
     |   \---[[...login]]
     |           page.tsx
@@ -46,6 +50,7 @@ src
     |           page.tsx
     |           
     \---utils
+        |   color.ts
         |   date.ts
         |   
         \---db

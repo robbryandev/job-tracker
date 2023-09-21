@@ -1,8 +1,6 @@
 ## To-do
 
 ### Main
-* Add job status statistics
-  - and option to turn toggle
 * Flesh out home page
 * Restyle app
 * Customize register / login pages

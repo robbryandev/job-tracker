@@ -10,24 +10,18 @@ import Paper from '@mui/material/Paper';
 import Link from 'next/link';
 import { type JobDb } from '@/utils/db/schema/job';
 import { toRelative } from '@/utils/date';
-import colors from "tailwindcss/colors";
 import { SiInstatus } from "react-icons/si";
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
+import { statusColor } from '@/utils/color';
 
 export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
   const router = useRouter();
   const datedJobs: JobDb[] = [...userJobs].sort((a: JobDb, b: JobDb) => {
     return moment(a.statusDate).unix() >= moment(b.statusDate).unix() ? -1 : 1;
   });
-  const statusColor = {
-    "applied": colors.blue["300"],
-    "rejected": colors.red["400"],
-    "interview": colors.purple["300"],
-    "accepted": colors.green["500"]
-  }
   return (
-    <TableContainer component={Paper} className='max-w-3xl'>
+    <TableContainer component={Paper} className='max-w-3xl md:max-w-none'>
       <Table aria-label="job table">
         <TableHead className='bg-neutral-800'>
           <TableRow>
