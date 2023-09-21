@@ -3,7 +3,6 @@
 ### Main
 * Flesh out home page
 * Restyle app
-* Customize register / login pages
 
 ### Stretch
 * Implement Job aggregator

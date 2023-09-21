@@ -40,7 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### Main
 * Flesh out home page
 * Restyle app
-* Customize register / login pages
 
 ### Stretch
 * Implement Job aggregator
