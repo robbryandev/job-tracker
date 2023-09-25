@@ -47,12 +47,12 @@ export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
                   router.push(jobPath);
                 }}>
                   <TableCell>
-                    <Link
+                    <a
                       href={jobPath}
                       className="underline underline-offset-1"
                     >
                       {job.company}
-                    </Link>
+                    </a>
                   </TableCell>
                   <TableCell>
                     <pre><SiInstatus className="svg-inline" style={{ color: statusColor[job.status!] }} />  {job.status}</pre>

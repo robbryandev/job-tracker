@@ -19,14 +19,21 @@ export default function LogIn() {
     if (user.isSignedIn) {
       router.push("/dashboard")
     }
-  }, [user.isSignedIn])
+  }, [router, user.isSignedIn])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     logIn.signIn?.create({
       identifier: authForm.emailAddress,
       password: authForm.password
+    }).then((res) => {
+      if (res.status === "complete") {
+        if (typeof window != "undefined") {
+          window.location.assign("/dashboard");
+        }
+      }
     }).catch((err: any) => {
+      console.log(`Err: ${err}}`)
       setAuthForm({ ...authForm, error: err.errors[0].message });
     });
   }
@@ -49,7 +56,7 @@ export default function LogIn() {
                 setAuthForm({ ...authForm, password: event.currentTarget.value })
               }} className="bg-transparent border-b border-b-neutral-200" />
             </label>
-            <button className="bg-black text-white w-20 px-2 py-1 rounded-md" type="submit">Login</button>
+            <button className="bg-blue-400 text-white w-20 px-2 py-1 rounded-md" type="submit">Login</button>
           </form>
         ) : null
       }

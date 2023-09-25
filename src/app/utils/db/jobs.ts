@@ -4,13 +4,13 @@ import { db } from "./drizzle"
 import { jobTable } from "./schema/schema";
 import { type JobDb, type Job } from "./schema/job"
 import { eq, and } from "drizzle-orm";
-import moment from "moment";
 
 export const jobDb = {
   add: async (job: Job) => {
     const res = await db
       .insert(jobTable)
       .values(job);
+    // @ts-ignore invalid type definition
     const dbRes = { jobId: parseInt(res.insertId) };
     return dbRes;
   },
