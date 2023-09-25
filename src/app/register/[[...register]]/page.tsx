@@ -4,11 +4,16 @@ import { useSignUp } from "@clerk/nextjs";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+type RegisterAuthForm = {
+  emailAddress: string,
+  password: string,
+  confirm: string,
+  error: string
+}
+
 export default function Register() {
   const { isLoaded, signUp } = useSignUp();
-  const [emailAddress, setEmailAddress] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [authForm, setAuthForm] = useState<RegisterAuthForm>({ emailAddress: "", password: "", confirm: "", error: "" });
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState("");
   const router = useRouter();
@@ -16,14 +21,19 @@ export default function Register() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (!isLoaded || password != confirm) {
+    setAuthForm({ ...authForm, error: "" });
+    if (!isLoaded) {
+      return;
+    }
+    if (authForm.password != authForm.confirm) {
+      setAuthForm({ ...authForm, error: "Passwords must match" });
       return;
     }
 
     try {
       await signUp.create({
-        emailAddress,
-        password,
+        emailAddress: authForm.emailAddress,
+        password: authForm.password
       });
 
       // send the email.
@@ -33,6 +43,7 @@ export default function Register() {
       setPendingVerification(true);
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
+      setAuthForm({ ...authForm, error: err.errors[0].message });
     }
   };
 
@@ -57,6 +68,7 @@ export default function Register() {
       }
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
+      setAuthForm({ ...authForm, error: err.errors[0].message });
     }
   };
 
@@ -64,17 +76,20 @@ export default function Register() {
     <div>
       {!pendingVerification && (
         <form className="bg-white rounded-xl w-72 flex flex-col gap-4 p-6 mt-4">
+          <div style={{
+            display: authForm.error ? "block" : "none"
+          }} className="bg-red-600 text-white px-4 rounded-md">Error: {authForm.error}</div>
           <div>
             <label htmlFor="email">Email</label>
-            <input onChange={(e) => setEmailAddress(e.target.value)} id="email" name="email" type="email" className="bg-transparent border-b border-b-neutral-200" />
+            <input onChange={(e) => setAuthForm({ ...authForm, emailAddress: e.target.value })} id="email" name="email" type="email" className="bg-transparent border-b border-b-neutral-200" />
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input onChange={(e) => setPassword(e.target.value)} id="password" name="password" type="password" className="bg-transparent border-b border-b-neutral-200" />
+            <input onChange={(e) => setAuthForm({ ...authForm, password: e.target.value })} id="password" name="password" type="password" className="bg-transparent border-b border-b-neutral-200" />
           </div>
           <div>
             <label htmlFor="confirm-password">Confirm Password</label>
-            <input onChange={(e) => setConfirm(e.target.value)} id="confirm-password" name="confirm-password" type="password" className="bg-transparent border-b border-b-neutral-200" />
+            <input onChange={(e) => setAuthForm({ ...authForm, confirm: e.target.value })} id="confirm-password" name="confirm-password" type="password" className="bg-transparent border-b border-b-neutral-200" />
           </div>
           <button className="self-start bg-black text-white px-2 py-1 rounded-md" onClick={handleSubmit}>Register</button>
         </form>
@@ -82,6 +97,9 @@ export default function Register() {
       {pendingVerification && (
         <div>
           <form className="bg-white rounded-xl w-72 flex flex-col gap-4 p-6 mt-4">
+            <div style={{
+              display: authForm.error ? "block" : "none"
+            }} className="bg-red-600 text-white px-4 rounded-md">Error: {authForm.error}</div>
             <label htmlFor="code">
               Check your email for a confirmation code
             </label>

@@ -7,8 +7,7 @@ let base = fs.readFileSync(path + "/README.md", "utf-8");
 const refs = [
   { name: "setup", arg: "setup" },
   { name: "architecture", arg: "arc" },
-  { name: "tree", arg: "tree" },
-  { name: "to-do", arg: "todo" },
+  { name: "tree", arg: "tree" }
 ];
 
 refs.forEach((ref) => {

@@ -47,15 +47,6 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## To-do
-
-### Main
-* Add password confirmation error msg
-
-### Stretch
-* Implement Job aggregator
-  - with button to directly add jobs to applied section
-
 ## Folder Structure 
 
 ```
