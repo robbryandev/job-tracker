@@ -36,6 +36,7 @@ src
     |   |   
     |   \---[user]
     |       \---[job]
+    |               client.tsx
     |               page.tsx
     |               
     +---hooks

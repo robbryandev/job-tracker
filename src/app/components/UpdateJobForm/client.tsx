@@ -7,8 +7,9 @@ import { updateJob } from "./jobAction";
 import { type JobDb, type JobStatus } from "@/utils/db/schema/job";
 import { toRelative } from "@/utils/date";
 
-export default function UpdateJobForm({ currentJob }: { currentJob: JobDb }) {
-  const [status, setStatus] = useState<JobStatus>(currentJob.status as JobStatus);
+export default function UpdateJobForm({
+  currentJob, setLastUpdated, setStatus
+}: { currentJob: JobDb, setLastUpdated: CallableFunction, setStatus: CallableFunction }) {
   const [tmpStatus, setTmpStatus] = useState<JobStatus>(currentJob.status as JobStatus);
   const [date, setDate] = useState<Date>(new Date());
   return (
@@ -16,7 +17,9 @@ export default function UpdateJobForm({ currentJob }: { currentJob: JobDb }) {
       <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white">
         <form action={() => {
           updateJob({ status: tmpStatus, date: date, currentJob: currentJob! })
-        }} onSubmit={() => setStatus(tmpStatus)} className="mx-auto h-full w-10/12">
+          setLastUpdated(date)
+          setStatus(tmpStatus)
+        }} className="mx-auto h-full w-10/12">
           <div className="mx-auto flex h-full flex-col space-y-8 p-4">
             <h3 className="pl-2 text-2xl font-medium">Update Job</h3>
             <div className="flex flex-col gap-2">
