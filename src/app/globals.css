@@ -2,28 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+html {
   --foreground-rgb: rgb(0, 0, 0);
-  --background-start-rgb: rgb(214, 219, 220);
-  --background-end-rgb: rgb(255, 255, 255);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: rgb(255, 255, 255);
-    --background-start-rgb: rgb(0, 0, 0);
-    --background-end-rgb: rgb(0, 0, 0);
-  }
-}
-
-body {
+  --background-rgb: rgb(214, 219, 220);
   color: var(--foreground-rgb);
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--background-rgb);
 }
 
 html,
@@ -75,4 +58,11 @@ svg {
   color: white;
   opacity: 1;
   background-color: var(--rdp-accent-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --foreground-rgb: rgb(255, 255, 255);
+    --background-rgb: rgb(20, 20, 20);
+  }
 }

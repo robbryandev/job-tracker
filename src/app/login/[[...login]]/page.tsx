@@ -42,7 +42,7 @@ export default function LogIn() {
     <main>
       {
         !user.isSignedIn ? (
-          <form className="flex flex-col gap-4 bg-white w-64 p-4 rounded-xl mt-4" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-4 bg-white dark:bg-neutral-700 w-64 p-4 rounded-xl mt-4" onSubmit={handleSubmit}>
             <div style={{
               display: authForm.error ? "block" : "none"
             }} className="bg-red-600 text-white px-4 rounded-md">Error: {authForm.error}</div>
@@ -56,7 +56,7 @@ export default function LogIn() {
                 setAuthForm({ ...authForm, password: event.currentTarget.value })
               }} className="bg-transparent border-b border-b-neutral-200" />
             </label>
-            <button className="bg-blue-400 text-white w-20 px-2 py-1 rounded-md" type="submit">Login</button>
+            <button className="bg-blue-400 dark:bg-blue-500 text-white w-20 px-2 py-1 rounded-md" type="submit">Login</button>
           </form>
         ) : null
       }

@@ -11,7 +11,7 @@ export default function NotesForm({ currentJob, setLastUpdated }: { currentJob: 
             updateNotes({ "job": currentJob, content: contentState })
             setLastUpdated(new Date());
         }}>
-            <textarea className="border border-spacing-2 border-neutral-300 p-2" name="content" id="content" cols={textSize[0]} rows={textSize[1]} value={contentState} placeholder="Notes" onChange={(elm) => {
+            <textarea className="border border-spacing-2 border-neutral-300 p-2 dark:bg-neutral-700" name="content" id="content" cols={textSize[0]} rows={textSize[1]} value={contentState} placeholder="Notes" onChange={(elm) => {
                 setContent(elm.currentTarget.value)
             }}></textarea>
             <br />

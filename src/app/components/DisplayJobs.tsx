@@ -7,7 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Link from 'next/link';
 import { type JobDb } from '@/utils/db/schema/job';
 import { toRelative } from '@/utils/date';
 import { SiInstatus } from "react-icons/si";
@@ -21,7 +20,7 @@ export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
     return moment(a.statusDate).unix() >= moment(b.statusDate).unix() ? -1 : 1;
   });
   return (
-    <TableContainer component={Paper} className='max-w-3xl md:max-w-none'>
+    <TableContainer component={Paper} className='max-w-3xl md:max-w-none dark:!bg-neutral-700'>
       <Table aria-label="job table">
         <TableHead className='bg-neutral-800'>
           <TableRow>
@@ -38,7 +37,7 @@ export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody className='[&>*:nth-child(odd)]:bg-neutral-50'>
+        <TableBody className='[&>*:nth-child(odd)]:bg-neutral-50 dark:[&>*:nth-child(odd)]:bg-neutral-500 dark:[&>*:nth-child(even)]:bg-neutral-600'>
           {
             datedJobs.map((job: JobDb) => {
               const jobPath = `/dashboard/${job.userId}/${job.id}`
@@ -46,7 +45,7 @@ export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
                 <TableRow key={job.id} role="link" className='cursor-pointer' onClick={() => {
                   router.push(jobPath);
                 }}>
-                  <TableCell>
+                  <TableCell className='dark:!text-white'>
                     <a
                       href={jobPath}
                       className="underline underline-offset-1"
@@ -54,10 +53,10 @@ export default function DisplayJobs({ userJobs }: { userJobs: JobDb[] }) {
                       {job.company}
                     </a>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className='dark:!text-white'>
                     <pre><SiInstatus className="svg-inline" style={{ color: statusColor[job.status!] }} />  {job.status}</pre>
                   </TableCell>
-                  <TableCell>{toRelative(job.statusDate!)}</TableCell>
+                  <TableCell className='dark:!text-white'>{toRelative(job.statusDate!)}</TableCell>
                 </TableRow>
               );
             })

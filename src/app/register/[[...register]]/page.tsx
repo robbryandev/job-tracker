@@ -75,7 +75,7 @@ export default function Register() {
   return (
     <div>
       {!pendingVerification && (
-        <form className="bg-white rounded-xl w-72 flex flex-col gap-4 p-6 mt-4">
+        <form className="bg-white dark:bg-neutral-700 rounded-xl w-72 flex flex-col gap-4 p-6 mt-4">
           <div style={{
             display: authForm.error ? "block" : "none"
           }} className="bg-red-600 text-white px-4 rounded-md">Error: {authForm.error}</div>
@@ -91,12 +91,12 @@ export default function Register() {
             <label htmlFor="confirm-password">Confirm Password</label>
             <input onChange={(e) => setAuthForm({ ...authForm, confirm: e.target.value })} id="confirm-password" name="confirm-password" type="password" className="bg-transparent border-b border-b-neutral-200" />
           </div>
-          <button className="self-start bg-black text-white px-2 py-1 rounded-md" onClick={handleSubmit}>Register</button>
+          <button className="self-start bg-blue-400 dark:bg-blue-500 text-white px-2 py-1 rounded-md" onClick={handleSubmit}>Register</button>
         </form>
       )}
       {pendingVerification && (
         <div>
-          <form className="bg-white rounded-xl w-72 flex flex-col gap-4 p-6 mt-4">
+          <form className="bg-white dark:bg-neutral-700 rounded-xl w-72 flex flex-col gap-4 p-6 mt-4">
             <div style={{
               display: authForm.error ? "block" : "none"
             }} className="bg-red-600 text-white px-4 rounded-md">Error: {authForm.error}</div>
@@ -111,7 +111,7 @@ export default function Register() {
               onChange={(e) => setCode(e.target.value)}
               className="bg-transparent border-b border-b-neutral-200"
             />
-            <button className="self-start bg-black text-white px-2 py-1 rounded-md" onClick={onPressVerify}>
+            <button className="self-start bg-blue-400 dark:bg-blue-500 text-white px-2 py-1 rounded-md" onClick={onPressVerify}>
               Confirm
             </button>
           </form>

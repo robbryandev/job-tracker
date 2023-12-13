@@ -9,7 +9,7 @@ export default function NewJobForm() {
   const [company, setCompany] = useState("");
   const [date, setDate] = useState<Date>(new Date());
   return (
-    <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white">
+    <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white dark:bg-neutral-700">
       <form action={() => newJob({ company: company, date: moment.utc(date, "YYYY-MM-DD").toDate() })} onSubmit={() => {
         setCompany("");
       }} className="mx-auto h-full w-10/12">
@@ -33,7 +33,7 @@ export default function NewJobForm() {
               </Popover.Trigger>
               <Popover.Portal>
                 <Popover.Content>
-                  <div className="bg-white border border-neutral-400 rounded-xl p-4">
+                  <div className="bg-white dark:bg-neutral-700 border border-neutral-400 dark:border-neutral-500 rounded-xl p-4">
                     <DayPicker
                       mode="single"
                       selected={date}

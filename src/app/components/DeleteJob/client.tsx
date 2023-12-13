@@ -14,7 +14,7 @@ export default function DeleteJob({ currentJob }: { currentJob: JobDb }) {
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content>
-          <div className="bg-white shadow-md p-6">
+          <div className="bg-white dark:bg-neutral-700 shadow-md p-6">
             <form action={() => deleteJob(currentJob)} onSubmit={() => {
               setTimeout(() => {
                 router.push("/dashboard");

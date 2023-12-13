@@ -14,7 +14,7 @@ export default function UpdateJobForm({
   const [date, setDate] = useState<Date>(new Date());
   return (
     <>
-      <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white">
+      <div className="h-full w-2/3 max-w-[300px] rounded-md shadow-md bg-white dark:bg-neutral-700">
         <form action={() => {
           updateJob({ status: tmpStatus, date: date, currentJob: currentJob! })
           setLastUpdated(date)
@@ -24,7 +24,7 @@ export default function UpdateJobForm({
             <h3 className="pl-2 text-2xl font-medium">Update Job</h3>
             <div className="flex flex-col gap-2">
               <label htmlFor="status">Status</label>
-              <select name="status" id="status" value={tmpStatus} onChange={(elm) => {
+              <select className="dark:bg-neutral-600" name="status" id="status" value={tmpStatus} onChange={(elm) => {
                 setTmpStatus(elm.currentTarget.value as JobStatus);
               }}>
                 <optgroup>
